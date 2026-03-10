@@ -1,40 +1,41 @@
 export const projectsData = [
     {
         id: 1,
-        name: 'AI Powered Financial App',
-        description: "Me and my team built an AI-powered financial mobile application. I have developed API using Express, Typescript, OpenAI, AWS, and MongoDB. Used OTP via AWS SES, Google, and Facebook for the authentication system. Built AI assistants using OpenAI's latest model and trained using our dataset. Voice messages are converted to text using AWS Transcribe. The app fetches data from Google Sheets and generates a PDF term sheet, sent via AWS SES.",
-        tools: ['Express', 'MongoDB', 'OpenAI API', 'AWS SES', 'AWS S3', 'Node Mailer', 'Joi', 'Puppeteer', 'EC2', 'PM2', 'Nginx'],
-        role: 'Backend Developer',
+        name: 'Portfolio Website',
+        description: "Build an interactive and responsive portfolio website using modern web technologies. The website should showcase my skills, projects, and experience in a visually appealing way. It should include sections for an about me, projects, experience, education, and contact information. The design should be clean and professional, with smooth animations and transitions to enhance user experience.",
+        tools: ['HTML','CSS','JavaScript'],
+        role: 'Web Developer',
         code: '',
         demo: '',
     },
     {
         id: 2,
-        name: 'Travel Agency App',
-        description: 'I have designed and developed a full-stack web app for 2Expedition, a travel agency in Armenia. I created the UI using NextJS, Typescript, MUI, TailwindCSS, Google Maps, Sun-Editor, and React Slick. The app supports multiple languages and currencies. I developed the API using NestJS, Typescript, MySQL, TypeORM, AWS, and Nodemailer. I deployed the front-end app to AWS Amplify and the back-end app to AWS EC2.',
-        tools: ['NextJS', 'Tailwind CSS', "Google Maps", "NestJS", "TypeScript", "MySQL", "AWS S3", "Sun-Editor", "Gmail Passkey"],
-        role: 'Full Stack Developer',
+        name: 'Portfolio',
+        description: 'Build an portfolio website using ReactJS and TailwindCSS. The website should be responsive and visually appealing, showcasing my skills, projects, and experience. It should include sections for an about me, projects, experience, education, and contact information. The design should be clean and professional, with smooth animations and transitions to enhance user experience.',
+        tools: ['React', 'Node.js', 'NextJS', 'TailwindCSS'],
+        role:'Full Stack Developer' ,
         code: '',
         demo: '',
     },
     {
         id: 3,
-        name: 'AI Powered Real Estate',
-        description: 'My team built an AI-based real estate app using Replicate API and OpenAI. We used Express, Typescript, OpenAI, Replicate, Stripe, and Mongoose to develop the API. We utilized NextJS, Formik, TailwindCSS, and other npm libraries for the UI. We have trained multiple AI assistants using the latest GPT model and integrated Replicate API for image processing. We added role-based auth, subscription plans, Cron job scheduling, and payment integration with Stripe.',
-        tools: ['React', 'Bootstrap', 'SCSS', 'Stripe', 'Express', 'TypeScript', 'MongoDB', 'Azure Blob', 'OpenAI API', 'Replicate AI', 'Cronjob', 'JWT'],
+        name: 'LEAPS-Sim',
+        description: 'This project explores a simulation-based approach to lightning energy harvesting. My team and I developed a Python program that simulates capturing lightning strikes and storing the generated energy in storage cells. Using algorithms and computational modeling, the system estimates how much electrical energy can be harvested and conserved, helping analyze the feasibility of lightning as a potential renewable energy source.',
+        tools: ['Python','Algorithms:-[Reinforcement Learning (RL)','Random Forest','Rule-Based Threshold Control(RB-TCA)]'],
         code: '',
-        role: 'Full Stack Developer',
+        role: 'Algorithm Developer & Research Analyst',
         demo: '',
     },
-    {
-        id: 4,
-        name: 'Newsroom Management',
-        description: "My team and I developed a newspaper management dashboard application called Newsroom Management. As a front-end developer, I worked on creating the dashboard using NextJS, Material UI, Redux, Calendar, and other necessary npm libraries. We used React Redux to manage the application's state and React-hook-form and Sun Editor to handle forms.",
-        tools: ['NextJS', 'Material UI', 'Redux', 'Sun Editor', "Calendar"],
-        code: '',
-        demo: '',
-        role: 'Full Stack Developer',
-    }
+
+    // {
+    //     id: 4,
+    //     name: 'Newsroom Management',
+    //     description: "My team and I developed a newspaper management dashboard application called Newsroom Management. As a front-end developer, I worked on creating the dashboard using NextJS, Material UI, Redux, Calendar, and other necessary npm libraries. We used React Redux to manage the application's state and React-hook-form and Sun Editor to handle forms.",
+    //     tools: ['NextJS', 'Material UI', 'Redux', 'Sun Editor', "Calendar"],
+    //     code: '',
+    //     demo: '',
+    //     role: 'Full Stack Developer',
+    // }
 ];
 
 

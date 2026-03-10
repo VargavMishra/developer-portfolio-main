@@ -1,10 +1,14 @@
 const path = require('path')
- 
+
 module.exports = {
+  output: "export",   // required for GitHub Pages
+
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+
   images: {
+    unoptimized: true,   // required for static export
     remotePatterns: [
       {
         protocol: 'https',
