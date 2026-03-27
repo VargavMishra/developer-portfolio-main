@@ -22,7 +22,7 @@ export default function ContactForm() {
 
       const data = await response.json();
       if (data.success) {
-        setResult("Form submitted successfully!");
+        setResult("Message Sent !!");
         event.target.reset();
       } else {
         setResult("Submission failed. Please try again later.");
