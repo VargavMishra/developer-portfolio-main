@@ -1,131 +1,91 @@
 "use client";
-// @flow strict
-import { isValidEmail } from "@/utils/check-email";
-import axios from "axios";
-import { useState } from "react";
-import { TbMailForward } from "react-icons/tb";
-import { toast } from "react-toastify";
 
-function ContactForm() {
-  const [error, setError] = useState({ email: false, required: false });
+import { useState } from 'react';
+
+export default function ContactForm() {
+  const [result, setResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [userInput, setUserInput] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
 
-  const checkRequired = () => {
-    if (userInput.email && userInput.message && userInput.name) {
-      setError({ ...error, required: false });
-    }
-  };
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    setResult("Sending...");
 
-  const handleSendMail = async (e) => {
-    e.preventDefault();
-
-    if (!userInput.email || !userInput.message || !userInput.name) {
-      setError({ ...error, required: true });
-      return;
-    } else if (error.email) {
-      return;
-    } else {
-      setError({ ...error, required: false });
-    };
+    const formData = new FormData(event.target);
+    formData.append("access_key", "3c9665ce-0e2f-41bc-87d1-20d784b9ab61");
 
     try {
-      setIsLoading(true);
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_APP_URL}/api/contact`,
-        userInput
-      );
-
-      toast.success("Message sent successfully!");
-      setUserInput({
-        name: "",
-        email: "",
-        message: "",
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
       });
+
+      const data = await response.json();
+      if (data.success) {
+        setResult("Form submitted successfully!");
+        event.target.reset();
+      } else {
+        setResult("Submission failed. Please try again later.");
+      }
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      setResult("Network error. Please check your connection.");
     } finally {
       setIsLoading(false);
-    };
+    }
   };
 
   return (
     <div>
-      <p className="font-medium mb-5 text-[#16f2b3] text-xl uppercase">Contact with me</p>
-      <div className="max-w-3xl text-white rounded-lg border border-[#464c6a] p-3 lg:p-5">
-        <p className="text-sm text-[#d3d8e8]">{"If you have any questions or concerns, please don't hesitate to contact me. I am open to any work opportunities that align with my skills and interests."}</p>
-        <div className="mt-6 flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label className="text-base">Your Name: </label>
+      <p className="font-bold text-3xl md:text-4xl text-[#16f2b3] uppercase tracking-wider mb-4">
+        CONTACT WITH ME
+      </p>
+      <div className="rounded-xl border border-[#2f3a5a] bg-[#020821] p-6 md:p-8 shadow-xl shadow-black/30">
+        <p className="text-sm md:text-base text-[#d3d8e8] mb-6">
+          If you have any questions or concerns, please don't hesitate to contact me. I am open to any
+          work opportunities that align with my skills and interests.
+        </p>
+
+        <form onSubmit={onSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm md:text-base text-[#a8b2d7] mb-2">Your Name:</label>
             <input
-              className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
+              name="name"
               type="text"
-              maxLength="100"
-              required={true}
-              onChange={(e) => setUserInput({ ...userInput, name: e.target.value })}
-              onBlur={checkRequired}
-              value={userInput.name}
+              required
+              className="w-full rounded-lg border border-[#2f3a5a] bg-[#07133f] px-4 py-3 text-white outline-none transition-all duration-200 focus:border-[#16f2b3]"
             />
           </div>
-
-          <div className="flex flex-col gap-2">
-            <label className="text-base">Your Email: </label>
+          <div>
+            <label className="block text-sm md:text-base text-[#a8b2d7] mb-2">Your Email:</label>
             <input
-              className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
+              name="email"
               type="email"
-              maxLength="100"
-              required={true}
-              value={userInput.email}
-              onChange={(e) => setUserInput({ ...userInput, email: e.target.value })}
-              onBlur={() => {
-                checkRequired();
-                setError({ ...error, email: !isValidEmail(userInput.email) });
-              }}
+              required
+              className="w-full rounded-lg border border-[#2f3a5a] bg-[#07133f] px-4 py-3 text-white outline-none transition-all duration-200 focus:border-[#16f2b3]"
             />
-            {error.email && <p className="text-sm text-red-400">Please provide a valid email!</p>}
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-base">Your Message: </label>
+          <div>
+            <label className="block text-sm md:text-base text-[#a8b2d7] mb-2">Your Message:</label>
             <textarea
-              className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-              maxLength="500"
               name="message"
-              required={true}
-              onChange={(e) => setUserInput({ ...userInput, message: e.target.value })}
-              onBlur={checkRequired}
-              rows="4"
-              value={userInput.message}
-            />
+              required
+              rows="5"
+              className="w-full rounded-lg border border-[#2f3a5a] bg-[#07133f] px-4 py-3 text-white outline-none transition-all duration-200 focus:border-[#16f2b3]"
+            ></textarea>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            {error.required && <p className="text-sm text-red-400">
-              All fiels are required!
-            </p>}
-            <button
-              className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-5 md:px-12 py-2.5 md:py-3 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
-              role="button"
-              onClick={handleSendMail}
-              disabled={isLoading}
-            >
-              {
-                isLoading ?
-                <span>Sending Message...</span>:
-                <span className="flex items-center gap-1">
-                  Send Message
-                  <TbMailForward size={20} />
-                </span>
-              }
-            </button>
-          </div>
-        </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-6 py-3 font-semibold text-white shadow-lg shadow-pink-500/40 transition-all duration-300 hover:from-pink-600 hover:to-violet-700 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isLoading ? 'Sending Message...' : 'Send Message'}
+          </button>
+
+          <p className="text-center text-sm text-[#16f2b3] min-h-[22px]">{result}</p>
+        </form>
       </div>
     </div>
   );
-};
-
-export default ContactForm;
+}
