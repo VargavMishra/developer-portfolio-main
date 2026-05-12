@@ -10,9 +10,63 @@ import "./css/globals.scss";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Portfolio of Vargav Mishra - Software Developer",
+  metadataBase: new URL("https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio"),
+  title: {
+    default: "Vargav Mishra | Full Stack Developer | AI SaaS & API Engineer",
+    template: "%s | Vargav Mishra"
+  },
   description:
-    "This is the portfolio of Vargav Mishra. I am a full stack developer and a self taught developer. I love to learn new things and I am always open to collaborating with others. I am a quick learner and I am always looking for new challenges.",
+    "Portfolio of Vargav Mishra, a Full Stack Developer specializing in React, Next.js, Node.js, FastAPI, AI SaaS, and scalable backend architecture.",
+  keywords: [
+    "Full Stack Developer",
+    "FastAPI Developer",
+    "AI SaaS Developer",
+    "Java Backend Developer",
+    "MERN Stack Developer",
+    "API Developer",
+    "Software Engineer",
+    "Vargav Mishra",
+    "React Developer",
+    "Next.js Developer"
+  ],
+  authors: [{ name: "Vargav Mishra" }],
+  creator: "Vargav Mishra",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio",
+    title: "Vargav Mishra | Full Stack Developer",
+    description: "Portfolio of Vargav Mishra, a Full Stack Developer specializing in React, Next.js, Node.js, FastAPI, AI SaaS, and scalable backend architecture.",
+    siteName: "Vargav Mishra Portfolio",
+    images: [
+      {
+        url: "/profilevargav.png",
+        width: 1200,
+        height: 630,
+        alt: "Vargav Mishra - Full Stack Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vargav Mishra | Full Stack Developer",
+    description: "Portfolio of Vargav Mishra, a Full Stack Developer specializing in React, Next.js, Node.js, FastAPI, AI SaaS, and scalable backend architecture.",
+    images: ["/profilevargav.png"],
+  },
+  alternates: {
+    canonical: "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }) {

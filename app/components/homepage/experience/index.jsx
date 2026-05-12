@@ -9,7 +9,7 @@ import GlowCard from "../../helper/glow-card";
 
 function Experience() {
   return (
-    <div id="experience" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">
+    <section id="experience" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">
       <Image
         src="/section.svg"
         alt="Hero"
@@ -21,9 +21,9 @@ function Experience() {
       <div className="flex justify-center my-5 lg:py-8">
         <div className="flex  items-center">
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-          <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-            Experiences
-          </span>
+          <h2 className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md font-bold uppercase">
+            Experience - Software Engineering Roles
+          </h2>
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
         </div>
       </div>
@@ -75,7 +75,7 @@ function Experience() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
