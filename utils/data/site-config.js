@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Vargav Mishra Portfolio",
-  title: "Vargav Mishra | Full Stack Developer | AI SaaS & API Engineer",
+  title: "Vargav Mishra | Developer Portfolio | Full Stack Developer",
   description:
     "Portfolio of Vargav Mishra, a Full Stack Developer specializing in React, Next.js, Node.js, FastAPI, AI SaaS, and scalable backend architecture.",
   siteUrl: (process.env.NEXT_PUBLIC_SITE_URL || "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio").replace(/\/+$/, ""),

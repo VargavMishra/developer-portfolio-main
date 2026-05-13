@@ -10,7 +10,7 @@ import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
 
 export const metadata = {
-  title: "Full Stack Developer Portfolio",
+  title: "Vargav Mishra | Developer Portfolio | Full Stack Developer",
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   alternates: {
