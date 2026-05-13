@@ -1,6 +1,7 @@
 import { personalData } from "@/utils/data/personal-data";
+import { projectsData } from "@/utils/data/projects-data";
+import { absoluteUrl, siteConfig } from "@/utils/data/site-config";
 import AboutSection from "./components/homepage/about";
-import Blog from "./components/homepage/blog";
 import ContactSection from "./components/homepage/contact";
 import Education from "./components/homepage/education";
 import Experience from "./components/homepage/experience";
@@ -8,59 +9,104 @@ import HeroSection from "./components/homepage/hero-section";
 import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
 
-async function getData() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-
-  const data = await res.json();
-
-  const filtered = data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
-
-  return filtered;
+export const metadata = {
+  title: "Full Stack Developer Portfolio",
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  alternates: {
+    canonical: siteConfig.siteUrl,
+  },
+  openGraph: {
+    url: siteConfig.siteUrl,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: absoluteUrl(siteConfig.socialImage),
+        width: 1682,
+        height: 722,
+        alt: "Preview of Vargav Mishra portfolio website",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [absoluteUrl(siteConfig.socialImage)],
+  },
 };
 
-export default async function Home() {
-  const blogs = await getData();
+export default function Home() {
+  const sameAs = [personalData.github, personalData.linkedIn, personalData.twitter]
+    .filter((url) => url && url !== "#");
+
+  const featuredProjects = projectsData.slice(0, 4).map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: project.name,
+      description: project.description,
+      keywords: project.tools.join(", "),
+      creator: {
+        "@id": absoluteUrl("/#person"),
+      },
+      url: absoluteUrl("/#projects"),
+    },
+  }));
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio/#person",
-        "name": "Vargav Mishra",
-        "url": "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio",
-        "image": "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio/profilevargav.png",
-        "sameAs": [
-          "https://github.com/VargavMishra",
-          "https://www.linkedin.com/in/vargavmishra2003/"
-        ],
+        "@id": absoluteUrl("/#person"),
+        "name": personalData.name,
+        "url": siteConfig.siteUrl,
+        "image": absoluteUrl(personalData.profile),
+        "description": personalData.description,
+        "sameAs": sameAs,
         "jobTitle": "Full Stack Developer",
+        "email": `mailto:${personalData.email}`,
         "worksFor": {
           "@type": "Organization",
           "name": "Self-Employed"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": personalData.address,
+          "addressCountry": "IN"
         }
       },
       {
         "@type": "WebSite",
-        "@id": "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio/#website",
-        "url": "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio",
-        "name": "Vargav Mishra Portfolio",
+        "@id": absoluteUrl("/#website"),
+        "url": siteConfig.siteUrl,
+        "name": siteConfig.name,
+        "description": siteConfig.description,
         "publisher": {
-          "@id": "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio/#person"
+          "@id": absoluteUrl("/#person")
         }
       },
       {
-        "@type": "SoftwareApplication",
-        "name": "Vargav Mishra SaaS Solutions",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "All",
-        "author": {
-          "@id": "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio/#person"
-        }
+        "@type": "WebPage",
+        "@id": absoluteUrl("/#webpage"),
+        "url": siteConfig.siteUrl,
+        "name": siteConfig.title,
+        "description": siteConfig.description,
+        "isPartOf": {
+          "@id": absoluteUrl("/#website")
+        },
+        "about": {
+          "@id": absoluteUrl("/#person")
+        },
+        "primaryImageOfPage": absoluteUrl(siteConfig.socialImage)
+      },
+      {
+        "@type": "ItemList",
+        "name": "Featured Projects",
+        "itemListElement": featuredProjects
       },
       {
         "@type": "FAQPage",
@@ -87,7 +133,7 @@ export default async function Home() {
   };
 
   return (
-    <div suppressHydrationWarning >
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -100,6 +146,6 @@ export default async function Home() {
       <Education />
       {/* <Blog blogs={blogs} /> */}
       <ContactSection />
-    </div>
+    </>
   )
 };

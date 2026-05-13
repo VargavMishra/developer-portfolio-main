@@ -1,10 +1,14 @@
+import { absoluteUrl, siteConfig } from "@/utils/data/site-config";
+
 export default function robots() {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: "/private/",
-    },
-    sitemap: "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio/sitemap.xml",
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+    ],
+    sitemap: absoluteUrl("/sitemap.xml"),
+    host: siteConfig.siteUrl,
   };
 }

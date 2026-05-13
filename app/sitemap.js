@@ -1,10 +1,20 @@
+import { absoluteUrl } from "@/utils/data/site-config";
+
 export default function sitemap() {
+  const lastModified = new Date();
+
   return [
     {
-      url: "https://vargavmishra.github.io/Vargav_Mishra_React_Portfolio",
-      lastModified: new Date(),
+      url: absoluteUrl(),
+      lastModified,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: absoluteUrl("/blog"),
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.8,
     },
   ];
 }
