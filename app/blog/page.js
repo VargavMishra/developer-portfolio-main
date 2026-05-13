@@ -36,14 +36,8 @@ export const metadata = {
 };
 
 async function getBlogs() {
-  const devUsername = personalData.devUsername || contactsData.devUsername;
-
-  if (!devUsername) {
-    return [];
-  }
-
   try {
-    const res = await fetch(`https://dev.to/api/articles?username=${devUsername}`, {
+    const res = await fetch(`https://dev.to/api/articles?per_page=30`, {
       next: { revalidate },
     });
 
@@ -52,7 +46,8 @@ async function getBlogs() {
     }
 
     const data = await res.json();
-    return Array.isArray(data) ? data : [];
+    const shuffled = data.sort(() => 0.5 - Math.random());
+    return Array.isArray(shuffled) ? shuffled : [];
   } catch {
     return [];
   }
