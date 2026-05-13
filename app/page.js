@@ -8,6 +8,7 @@ import Experience from "./components/homepage/experience";
 import HeroSection from "./components/homepage/hero-section";
 import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
+import Blog from "./components/homepage/blog";
 
 export const metadata = {
   title: "Vargav Mishra | Developer Portfolio | Full Stack Developer",
@@ -37,7 +38,25 @@ export const metadata = {
   },
 };
 
-export default function Home() {
+async function getBlogs() {
+  try {
+    // Fetch 30 recent articles from dev.to
+    const res = await fetch('https://dev.to/api/articles?per_page=30', { next: { revalidate: 60 } });
+    if (!res.ok) {
+      throw new Error('Failed to fetch blogs');
+    }
+    const data = await res.json();
+    // Shuffle the array to pick random blogs
+    const shuffled = data.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 6);
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const blogs = await getBlogs();
   const sameAs = [personalData.github, personalData.linkedIn, personalData.twitter]
     .filter((url) => url && url !== "#");
 
