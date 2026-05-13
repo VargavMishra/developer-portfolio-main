@@ -29,7 +29,7 @@ export const projectsData = [
 
     {
         id: 4,
-        name: 'Email automation for studio based clients',
+        name: 'StudioFlow Automation',
         description: "This project is a production-oriented automation system designed for an e-commerce photography studio. It streamlines the delivery process by monitoring project readiness, validating Google Drive delivery folders, and automatically dispatching personalized delivery emails to clients. The platform includes an event-driven retry mechanism for failed deliveries, open/click email tracking, and a comprehensive admin dashboard that allows studio staff to manage clients, track project statuses, and manually override automations.",
         tools: ['Node.js',
             'Express.js',
